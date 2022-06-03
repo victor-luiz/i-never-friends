@@ -1,0 +1,7 @@
+{
+  "name": "i-never-friends",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "react"
+}
