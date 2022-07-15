@@ -1,16 +1,35 @@
-import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar } from '@ionic/react';
-import ExploreContainer from '../components/ExploreContainer';
+import { IonButton, IonContent , IonPage, IonTitle, IonToolbar } from '@ionic/react';
+import './Home.css'
 
 const Home: React.FC = () => {
   return (
     <IonPage>
-      <IonHeader>
-        <IonToolbar>
-          <IonTitle>I Never Friends</IonTitle>
-        </IonToolbar>
-      </IonHeader>
-      <IonContent fullscreen>
-        <ExploreContainer />
+      <IonContent color={'dark'} fullscreen>
+        <main className='content'>
+          <span>Eu Nunca</span>
+          <div>
+            <IonButton 
+              shape='round' 
+              size='large' 
+              expand='block' 
+              color={'warning'}
+            >
+              Iniciar
+            </IonButton>
+            <IonButton 
+              shape='round' 
+              size='large' 
+              expand='block' 
+              color={'warning'} 
+              fill='outline'
+            >
+              Iniciar com amigos
+            </IonButton>
+          </div>
+        </main>
+        <footer>
+          <span>Power by Victor</span>
+        </footer>
       </IonContent>
     </IonPage>
   );
