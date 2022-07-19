@@ -1,0 +1,26 @@
+/* ion-content.content {
+  height: 100vh;
+  padding: 20px;
+
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+} */
+
+/* ion-textarea.message {
+  --background: var(--ion-color-medium);
+  --border-radius: 20px 20px 20px 20px;  
+} */
+
+.message {
+  /* border: solid 2px black; */
+  border-radius: 20px;
+  margin: 20px;
+  box-shadow: 0 0 1em black;
+}
+
+ion-button#btnNext {
+  --color: white;
+  --background: var(--ion-color-warning);
+}

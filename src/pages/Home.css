@@ -17,6 +17,14 @@
   color: teal;
 }
 
+.content .buttons {
+  padding: 20px;
+
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
 footer {
   text-align: center;
 }
