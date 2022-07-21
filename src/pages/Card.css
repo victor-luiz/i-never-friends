@@ -1,12 +1,11 @@
-/* ion-content.content {
-  height: 100vh;
-  padding: 20px;
-
+.content-card {
+  height: 90vh;
   display: flex;
-  flex-direction: row;
-  align-items: center;
+  flex-direction: column;
+  text-align: center;
   justify-content: center;
-} */
+  gap: 20px;
+}
 
 /* ion-textarea.message {
   --background: var(--ion-color-medium);
@@ -20,7 +19,13 @@
   box-shadow: 0 0 1em black;
 }
 
-ion-button#btnNext {
-  --color: white;
-  --background: var(--ion-color-warning);
+.title-header {
+  color: teal;
+  font-weight: bold;
+  font-size: 36px;
+}
+
+ion-textarea.phrase {
+  font-size: 24px;
+  font-weight: bold;
 }
