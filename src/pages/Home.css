@@ -12,9 +12,9 @@
 .content span {
   order: 0;
 
-  font-weight: bold;
-  font-size: 48px;
-  color: teal;
+  font-family: 'Bungee Inline';
+  font-size: 40px;
+  color: var(--ion-color-success-shade);
 }
 
 .content .buttons {

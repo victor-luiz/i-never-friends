@@ -5,8 +5,8 @@
   text-align: center;
   justify-content: center;
   gap: 20px;
+  padding: 0 10px;
 }
-
 /* ion-textarea.message {
   --background: var(--ion-color-medium);
   --border-radius: 20px 20px 20px 20px;  
@@ -15,17 +15,21 @@
 .message {
   /* border: solid 2px black; */
   border-radius: 20px;
-  margin: 20px;
-  box-shadow: 0 0 1em black;
+  margin: 10px;
+  box-shadow: inset 0 0 0.7em black;
 }
 
 .title-header {
+  font-family: 'Edu QLD Beginner', cursive;
   color: teal;
   font-weight: bold;
   font-size: 36px;
 }
 
 ion-textarea.phrase {
-  font-size: 24px;
+  font-family: 'Amatic SC';
+  font-size: 36px;
   font-weight: bold;
+  --padding-end: 10px;
+  --padding-start: 10px
 }

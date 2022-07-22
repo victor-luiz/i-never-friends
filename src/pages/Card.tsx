@@ -1,8 +1,26 @@
-import { IonPage, IonContent, IonTitle, IonTextarea, IonButton } from '@ionic/react';
+import { IonPage, IonContent, IonTextarea, IonButton } from '@ionic/react';
+import { phrasesSub18 } from '../utils/phrases'
 import './Card.css'
 import Friends from './Friends';
+import { useState } from 'react';
 
 const Card: React.FC = () => {
+  const [position, setPosition] = useState(handleRandomPosition);
+  const [positionUsed, setPositionUsed] = useState<number[]>([]); 
+
+  function handleNextPhrase() {
+    const positionRandom = handleRandomPosition();
+    if (positionUsed.includes(positionRandom)) {
+      handleNextPhrase();
+    }
+    setPositionUsed([...positionUsed, position])
+    setPosition(positionRandom)
+  }
+
+  function handleRandomPosition(): number {
+    return Math.floor(Math.random() * (phrasesSub18.length));
+  }
+
   return (
     <IonPage>
       <IonContent color={'dark'} fullscreen>
@@ -14,7 +32,7 @@ const Card: React.FC = () => {
               color={'light'}
               readonly={true}
               autoGrow={true}
-              value={'precisei ir ao médico devido a um objeto estranho preso em meu nariz ou ouvido.'} 
+              value={phrasesSub18[position]} 
             />
           </div>
           <IonButton
@@ -24,6 +42,7 @@ const Card: React.FC = () => {
             expand='block'
             color={'warning'}
             fill='outline'
+            onClick={handleNextPhrase}
           >
             Proximo
           </IonButton>
