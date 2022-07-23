@@ -1,20 +1,26 @@
-import { IonPage, IonContent, IonTextarea, IonButton } from '@ionic/react';
+import { IonPage, IonContent, IonTextarea, IonButton, IonFab, IonFabButton, IonIcon } from '@ionic/react';
 import { phrasesSub18 } from '../utils/phrases'
 import './Card.css'
-import Friends from './Friends';
 import { useState } from 'react';
+import { beerOutline, exit } from 'ionicons/icons';
 
-const Card: React.FC = () => {
+interface Props {
+  friends?: string[];
+}
+
+const Card: React.FC<Props> = ({ friends }) => {
   const [position, setPosition] = useState(handleRandomPosition);
-  const [positionUsed, setPositionUsed] = useState<number[]>([]); 
+  const [positionUsed, setPositionUsed] = useState<number[]>([]);
+
+
 
   function handleNextPhrase() {
     const positionRandom = handleRandomPosition();
     if (positionUsed.includes(positionRandom)) {
       handleNextPhrase();
     }
-    setPositionUsed([...positionUsed, position])
-    setPosition(positionRandom)
+    setPositionUsed([...positionUsed, position]);
+    setPosition(positionRandom);
   }
 
   function handleRandomPosition(): number {
@@ -47,7 +53,16 @@ const Card: React.FC = () => {
             Proximo
           </IonButton>
         </div>
-        <Friends />
+        <IonFab vertical="bottom" horizontal="start" slot="fixed">
+          <IonFabButton color={'warning'} routerLink={'/friends'}>
+            <IonIcon icon={beerOutline} />
+          </IonFabButton>
+        </IonFab>
+        <IonFab vertical="bottom" horizontal="end" slot="fixed">
+          <IonFabButton color={'danger'}>
+            <IonIcon icon={exit} />
+          </IonFabButton>
+        </IonFab>
       </IonContent>
     </IonPage>
   )
