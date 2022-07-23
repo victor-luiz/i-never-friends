@@ -64,7 +64,7 @@ const Home: React.FC = () => {
           </div>
         </main>
         <footer>
-          <span>Power by Victor</span>
+          <span>Powered by Victor</span>
         </footer>
         <IonModal id="example-modal" ref={modal} trigger="open-modal">
           <IonContent color={'dark'}>

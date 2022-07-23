@@ -3,6 +3,7 @@ import { IonRouterOutlet } from '@ionic/react';
 import { IonReactRouter } from '@ionic/react-router';
 import Home from './pages/Home';
 import Card from './pages/Card';
+import Friends from './pages/Friends';
 
 const Routes: React.FC = () => (
   <IonReactRouter>
@@ -15,6 +16,9 @@ const Routes: React.FC = () => (
       </Route>
       <Route exact path="/card">
         <Card />
+      </Route>
+      <Route exact path="/friends">
+        <Friends />
       </Route>
     </IonRouterOutlet>
   </IonReactRouter>
