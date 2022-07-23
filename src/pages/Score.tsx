@@ -16,19 +16,32 @@ const Score: React.FC = () => {
     {name: 'Fabricio', score: 6},
     {name: 'Gustavo', score: 7},
     {name: 'Fernando', score: 8},
+    {name: 'Diego', score: 5},
+    {name: 'Victor', score: 4},
+    {name: 'Fabricio', score: 6},
+    {name: 'Gustavo', score: 7},
+    {name: 'Fernando', score: 8},
+    {name: 'Victor', score: 4},
+    {name: 'Fabricio', score: 6},
+    {name: 'Gustavo', score: 7},
+    {name: 'Fernando', score: 8},
   ]
 
   return (
     <>
       <IonPage>
-        <IonContent color={'dark'}>
+        <IonContent fullscreen color={'dark'}>
           <main className='content'>
             <span className="title-header">Eu nunca...</span>
-            <IonList>
+            <IonList className='players-list'>
               {
                 participantes.map(it => {
                   return (
-                    <IonItem color={'black'} lines='none'>
+                    <IonItem 
+                      className='players-item-list'
+                      color={'black'}
+                      lines='none'
+                    >
                       <IonLabel>{it.name}</IonLabel>
                       <IonLabel>{it.score}</IonLabel>
                     </IonItem>

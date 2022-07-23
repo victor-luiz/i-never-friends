@@ -59,7 +59,7 @@ const Card: React.FC<Props> = ({ friends }) => {
           </IonFabButton>
         </IonFab>
         <IonFab vertical="bottom" horizontal="end" slot="fixed">
-          <IonFabButton color={'danger'}>
+          <IonFabButton color={'danger'} routerLink={'/score'}>
             <IonIcon icon={exit} />
           </IonFabButton>
         </IonFab>

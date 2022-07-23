@@ -1,3 +1,24 @@
+.content {
+  padding: 0 10px;
+}
+
+span {
+  margin-top: 2rem;
+}
+
+.players-list {
+  padding: 5px 0;
+  padding: 0 10px;
+  border-radius: 10px;
+  border-top: 2px solid yellow;
+  background-color: yellow;
+  height: 55%;
+  overflow-y: scroll;
+}
+
 .button-newgame {
   margin: 0 10px;
+  position: -webkit-sticky;
+  position: sticky;
+  top: 150;
 }
