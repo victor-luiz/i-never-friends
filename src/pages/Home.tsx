@@ -1,12 +1,11 @@
-import { IonButton, IonContent, IonModal, IonPage, IonToolbar, IonButtons, IonIcon, IonItem, IonInput } from '@ionic/react';
-import { add, arrowForward, close, trashBin } from 'ionicons/icons'
-import { useRef, useState } from 'react';
+import { IonButton, IonContent, IonModal, IonPage } from '@ionic/react';
+import { useRef } from 'react';
+import AddFriends from './AddFriends';
 
 
 import './Home.css'
 
 const Home: React.FC = () => {
-  const [friends, setFriends] = useState<string[]>([''])
 
   const modal = useRef<HTMLIonModalElement>(null);
 
@@ -14,26 +13,8 @@ const Home: React.FC = () => {
     modal.current?.dismiss();
   }
 
-  function addNewFriend() {
-    setFriends([...friends, '']);
-  }
-
-  function removeFriend(position: number) {
-    const updateFriends = friends.filter((value, index) => position !== index);
-    
-    setFriends(updateFriends);
-  }
-
-  function handleSaveFriend(position: number, value: string) {
-    const updateFriends = friends.map((friend, index) => {
-      if (index === position) {
-        return value
-      } else {
-        return friend
-      }
-    });
-
-    setFriends(updateFriends);
+  function openCard() {
+    localStorage.setItem('friends', JSON.stringify([]));
   }
 
   return (
@@ -47,6 +28,7 @@ const Home: React.FC = () => {
               size='large' 
               expand='block' 
               color={'warning'}
+              onClick={openCard}
               routerLink="/card"
             >
               Iniciar
@@ -67,50 +49,7 @@ const Home: React.FC = () => {
           <span>Powered by Diego & Victor</span>
         </footer>
         <IonModal id="example-modal" ref={modal} trigger="open-modal">
-          <IonContent color={'dark'}>
-            <IonToolbar color={'warning'}>
-              <IonButtons>
-                <IonButton color="dark" onClick={dismiss}>
-                  <IonIcon icon={close} />
-                </IonButton>
-              </IonButtons>
-              <IonButtons slot="end">
-                <IonButton slot='end' color="dark" onClick={dismiss} routerLink="/card">
-                  <IonIcon icon={arrowForward} />
-                </IonButton>
-              </IonButtons>
-            </IonToolbar>
-            {friends.map((friend, index) => {
-              return (
-                <IonItem key={index} color={'dark'}>
-                  <IonInput
-                    name='friend'
-                    placeholder='Digite o nome'
-                    value={friend}
-                    onIonChange={event => handleSaveFriend(index, event.detail.value!)}
-                  />
-                  <IonButtons slot='end'>
-                    <IonButton onClick={addNewFriend}>
-                      <IonIcon
-                        icon={add} 
-                        color={'success'}
-                      />
-                    </IonButton>
-                    <IonButton
-                      disabled={friends.length < 2}
-                      onClick={() => removeFriend(index)}
-                      slot="icon-only"
-                    >
-                      <IonIcon
-                        icon={trashBin} 
-                        color={'danger'}
-                      />
-                    </IonButton>
-                  </IonButtons>
-                </IonItem>
-              );
-            })}
-          </IonContent>
+          <AddFriends closeModel={dismiss} />
         </IonModal>
       </IonContent>
     </IonPage>

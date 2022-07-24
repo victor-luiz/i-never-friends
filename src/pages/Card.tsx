@@ -1,24 +1,39 @@
-import { IonPage, IonContent, IonTextarea, IonButton, IonFab, IonFabButton, IonIcon } from '@ionic/react';
+import { IonPage, IonContent, IonTextarea, IonButton, IonFab, IonFabButton, IonIcon, IonModal } from '@ionic/react';
 import { phrasesSub18 } from '../utils/phrases'
 import './Card.css'
-import { useState } from 'react';
-import { beerOutline, exit } from 'ionicons/icons';
+import { useState, useEffect } from 'react';
+import { arrowBack, peopleOutline } from 'ionicons/icons';
+import { FriendsPoints } from '../dto/FriendsPoints';
+import Friends from './Friends';
 
-interface Props {
-  friends?: string[];
-}
-
-const Card: React.FC<Props> = ({ friends }) => {
+const Card: React.FC = () => {
   const [position, setPosition] = useState(handleRandomPosition);
   const [positionUsed, setPositionUsed] = useState<number[]>([]);
+  const [open, setOpen] = useState(false);
+  const [friendsPoints, setFriendsPoints] = useState<FriendsPoints[]>([]);
+  const [isCheck, setIsCheck] = useState<number[]>([]);
 
+  let isValidChange = true;
 
+  const closeModel = () => {
+    setOpen(false)
+  }
+
+  useEffect(() => {
+    const friendsLocalStorage  = localStorage.getItem('friends');
+    const friends = friendsLocalStorage ? JSON.parse(friendsLocalStorage) : null;
+    setFriendsPoints(friends.map((friend: string[]) => {
+      return { name: friend, points: 0 }
+    }))
+  }, [])
 
   function handleNextPhrase() {
     const positionRandom = handleRandomPosition();
     if (positionUsed.includes(positionRandom)) {
       handleNextPhrase();
     }
+    isValidChange = false;
+    setIsCheck([]);
     setPositionUsed([...positionUsed, position]);
     setPosition(positionRandom);
   }
@@ -54,15 +69,35 @@ const Card: React.FC<Props> = ({ friends }) => {
           </IonButton>
         </div>
         <IonFab vertical="bottom" horizontal="start" slot="fixed">
-          <IonFabButton color={'warning'} routerLink={'/friends'}>
-            <IonIcon icon={beerOutline} />
+          <IonFabButton color={'primary'} routerLink="/">
+            <IonIcon icon={arrowBack} />
           </IonFabButton>
         </IonFab>
-        <IonFab vertical="bottom" horizontal="end" slot="fixed">
-          <IonFabButton color={'danger'} routerLink={'/score'}>
-            <IonIcon icon={exit} />
-          </IonFabButton>
-        </IonFab>
+
+        { friendsPoints.length > 0
+          ? (
+            <IonFab vertical="bottom" horizontal="end" slot="fixed">
+              <IonFabButton color={'warning'} onClick={() => setOpen(true)}>
+                <IonIcon icon={peopleOutline} />
+              </IonFabButton>
+            </IonFab>
+          ) : <></>
+        }
+        <IonModal 
+          isOpen={open}
+          onDidDismiss={closeModel}
+          breakpoints={[0, 0.2, 0.5, 0.7]}
+          initialBreakpoint={0.5}
+          backdropBreakpoint={0.2}
+        >
+          <Friends
+            friends={friendsPoints}
+            setFriends={setFriendsPoints}
+            isCheck={isCheck} 
+            setIsCheck={setIsCheck} 
+            isValidChange={isValidChange}
+          />
+        </IonModal>
       </IonContent>
     </IonPage>
   )

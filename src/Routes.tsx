@@ -4,7 +4,6 @@ import { IonReactRouter } from '@ionic/react-router';
 import Home from './pages/Home';
 import Card from './pages/Card';
 import Score from './pages/Score';
-import Friends from './pages/Friends';
 
 const Routes: React.FC = () => (
   <IonReactRouter>
@@ -20,9 +19,6 @@ const Routes: React.FC = () => (
       </Route>
       <Route exact path="/score">
         <Score />
-      </Route>
-      <Route exact path="/friends">
-        <Friends />
       </Route>
     </IonRouterOutlet>
   </IonReactRouter>

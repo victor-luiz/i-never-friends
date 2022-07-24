@@ -1,17 +1,16 @@
-import { IonButton, IonCheckbox, IonContent, IonHeader, IonItem, IonLabel, IonPage, IonTitle, IonToolbar } from '@ionic/react';
-import { useState } from 'react';
+import { IonCheckbox, IonContent, IonHeader, IonItem, IonLabel, IonTitle, IonToolbar } from '@ionic/react';
 import { FriendsPoints } from '../dto/FriendsPoints';
 import './Friends.css'
 
-const Friends: React.FC = () => {
-  const [friends, setFriends] = useState<FriendsPoints[]>([
-    { name: 'Victor', points: 0 },
-    { name: 'João', points: 0 },
-    { name: 'Maria', points: 0 },
-    { name: 'Júlia', points: 0 },
-  ]);
-  const [isCheck, setIsCheck] = useState<number[]>([]);
-  let isValidChange = true;
+interface Props {
+  friends: FriendsPoints[];
+  setFriends: (friends: FriendsPoints[]) => void;
+  isCheck: number[];
+  setIsCheck: (isCheck: number[]) => void;
+  isValidChange: boolean;
+}
+
+const Friends: React.FC<Props> = ({ friends, setFriends, setIsCheck, isCheck, isValidChange }) => {
 
   function handleChangePoints(isChecked: boolean, position: number) {
     if (isValidChange) {
@@ -36,37 +35,29 @@ const Friends: React.FC = () => {
     }
   }
 
-  function handleResetCheckBoxes() {
-    isValidChange = false;
-    setIsCheck([]);
-  }
-
   return (
-    <IonPage>
-      <IonHeader>
+    <IonContent color={'dark'}>
+      <IonHeader mode='ios' translucent>
         <IonToolbar color={'warning'}>
-          <IonTitle>Quem já?</IonTitle>
+          <IonTitle className='title'>Eu já...</IonTitle>
         </IonToolbar>
       </IonHeader>
-      <IonContent color={'dark'}>
-        {friends.map(({ name }, index) => {
-          return (
-            <IonItem color={'dark'} key={index}>
-              <IonLabel>{name}</IonLabel>
-              <IonCheckbox 
-                slot="end"
-                color={'warning'}
-                checked={isCheck.includes(index)}
-                onIonChange={event => handleChangePoints(event.detail.checked, index)}
-              /> 
-            </IonItem>
-          )
-        })}
-        <IonButton onClick={handleResetCheckBoxes}>Reset</IonButton>
-        <IonLabel>{isCheck}</IonLabel>
-      </IonContent>
-    </IonPage>
-  )
+      {friends.map(({ name, points }, index) => {
+        return (
+          <IonItem color={'dark'} key={index}>
+            <IonLabel>{name}</IonLabel>
+            <IonLabel color={'medium'}>{points}</IonLabel>
+            <IonCheckbox 
+              slot="end"
+              color={'warning'}
+              checked={isCheck.includes(index)}
+              onIonChange={event => handleChangePoints(event.detail.checked, index)}
+            /> 
+          </IonItem>
+        )
+      })}
+    </IonContent>
+)
 }
 
 export default Friends;
